@@ -1725,9 +1725,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"climate-policy@workspace:.":
+"climate-policy-search-app@workspace:.":
   version: 0.0.0-use.local
-  resolution: "climate-policy@workspace:."
+  resolution: "climate-policy-search-app@workspace:."
   dependencies:
     "@chakra-ui/react": ^2.1.2
     "@emotion/react": ^11
