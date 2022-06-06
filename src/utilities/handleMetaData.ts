@@ -7,9 +7,10 @@ type TMetaCollection = {
 /* 
   All the local storage functionality is handled here
   It is a very simple implementation that:
-  1. Retrieves existing meta data from local storage
-  2. Either adds to the existing collection or creates a new collection of the given policy's id
-  3. Saves the collection back to local storage
+  Retrieves existing meta data from local storage
+  Either adds to the existing collection or creates a new collection of the given policy's id
+  Deletes a specific meta item based on the key
+  Saves the collection back to local storage
 */
 
 const getMeta = (): TMetaCollection => {

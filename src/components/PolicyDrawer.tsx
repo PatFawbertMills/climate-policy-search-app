@@ -44,7 +44,7 @@ export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
     if(!policy?.policy_id) return;
     setPolicyMeta(deleteMetaItem(policy.policy_id, key));
     toast({
-      title: "Metadata deleted.",
+      title: "Metadata deleted",
       description: "The metadata has been removed from the policy.",
       status: "success",
       duration: 5000,

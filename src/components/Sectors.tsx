@@ -1,5 +1,5 @@
 import { SectorList } from "./SectorList";
-import { Heading, Box, Text } from "@chakra-ui/react";
+import { Heading, Box } from "@chakra-ui/react";
 import { TSector } from "../types";
 
 type TProps = {

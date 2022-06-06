@@ -30,10 +30,9 @@ export const PolicyList = ({ policies }: TProps) => {
   const { sector, policyId } = useParams();
   const [searchParams] = useSearchParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const searchTerm = searchParams.get("q");
 
-  // Take the URL if we have one and get the select policy
+  // Take the URL if we have one and get the selected policy
   const selectedPolicy = useMemo(() => {
     return policies.find((policy) => policy.policy_id.toString() === policyId);
   }, [policyId]);
@@ -72,7 +71,7 @@ export const PolicyList = ({ policies }: TProps) => {
           <Tbody>
             {filteredPolicies.length === 0 ? (
               <Tr>
-                <Td colSpan={2}>Sorry, no results found</Td>
+                <Td colSpan={3}>Sorry, no results found</Td>
               </Tr>
             ) : (
               filteredPolicies.map((policy) => (

@@ -1,15 +1,12 @@
 import { useMemo } from "react";
-import { useParams } from "react-router-dom";
 import { Heading, Box, Text } from "@chakra-ui/react";
 import { Sectors } from "./components/Sectors";
 import { Policies } from "./components/Policies";
 import { parseCSV } from "./utilities/parseCSV";
 import { getSectors } from "./utilities/getSectors";
 
-// This top-level component is using the react 'Container' pattern
-// The logic, state and data fetching is being handled here, which means our components can stay dumb and not worry about business logic
+// Top level app container handles the data fetching and passes the dataset into the components
 function App() {
-  const { sector } = useParams();
 
   // Configure our underlying data
   // For performance useMemo ensures we aren't doing these expensive calculations everytime the component renders

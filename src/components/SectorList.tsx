@@ -7,13 +7,12 @@ type TProps = {
 };
 
 // Accepts an object collection of sectors and renders them out in a list
-// Considered 'dumb' as the click handler is handled upstream, this means our components are never coupled to their use-case
 export const SectorList = ({ sectors }: TProps) => {
   const navigate = useNavigate();
   const [_, setSearchParams] = useSearchParams();
   const { sector } = useParams();
 
-  // When a sector is selected/deselected also clear the search box as that is considered bad UX because the results would be filtered by a previous search
+  // When a sector is selected/deselected also clear the search as it would be considered bad UX to persist when the results would be filtered by a previous search
   const handleClick = (selectedSector: string) => {
     setSearchParams({ q: "" });
     const target = selectedSector === sector ? "/" : "/" + selectedSector;

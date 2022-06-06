@@ -16,7 +16,7 @@ type TProps = {
 };
 
 // Render out the list of policy metadata
-// If we don't pass in a deletion handler, the meta cannot be deleted
+// If we don't pass in a deletion handler, the meta will not have the option to be deleted
 export const PolicyMeta = ({ policyMeta, handleDeleteMeta }: TProps) => {
   return (
     <TableContainer>

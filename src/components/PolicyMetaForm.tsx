@@ -38,20 +38,20 @@ export const PolicyMetaForm = ({ policyId, visible, onComplete }: TProps) => {
     setValue("");
   };
 
-  // Do any data handling, then call the parent's onComplete
+  // Do any data validation and storage handling, then call the parent's onComplete
   const handleFormSubmission = () => {
     setFormErrors(null);
     // Validate user has entered something
     if (!key.length || !value.length)
       return setFormErrors("Please supply a key and a value");
-    // Valiate that we do not already have this key
+    // Check whether we already have this key
     if (containsKey(policyId, key))
       return setFormErrors("This key already exists, please try another");
     addMetaData(policyId, { key: key, value: value });
     resetForm();
     onComplete();
     toast({
-      title: "Metadata added.",
+      title: "Metadata added",
       description: "The metadata has been added to the policy.",
       status: "success",
       duration: 5000,
