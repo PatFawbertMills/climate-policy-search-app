@@ -12,8 +12,8 @@ import {
   TableCaption,
   useDisclosure,
   Button,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-
 import { TPolicy } from "../types";
 import { PolicyDrawer } from "./PolicyDrawer";
 import { filterPolicies } from "../utilities/filterPolicies";
@@ -26,6 +26,7 @@ type TProps = {
 // Carries out additional filtering, via a utility method, on the collection based on sector and search params
 // The Drawer component is rendered within this view as it needs access to the selectedPolicy
 export const PolicyList = ({ policies }: TProps) => {
+  const variant = useBreakpointValue({ base: "base", md: "md" });
   const navigate = useNavigate();
   const { sector, policyId } = useParams();
   const [searchParams] = useSearchParams();
@@ -84,7 +85,7 @@ export const PolicyList = ({ policies }: TProps) => {
                       size="sm"
                       onClick={() => handleMetadataClick(policy)}
                     >
-                      Metadata
+                      {variant === "base" ? "🖉" : "Edit"}
                     </Button>
                   </Td>
                 </Tr>
