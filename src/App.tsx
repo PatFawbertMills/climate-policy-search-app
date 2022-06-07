@@ -7,14 +7,13 @@ import { getSectors } from "./utilities/getSectors";
 
 // Top level app container handles the data fetching and passes the dataset into the components
 function App() {
-
   // Configure our underlying data
   // For performance useMemo ensures we aren't doing these expensive calculations everytime the component renders
   const dataSet = useMemo(() => parseCSV(), []);
   const sectors = useMemo(() => getSectors(dataSet.data), [dataSet]);
 
   return (
-    <Box maxW="1200px" mx="auto" my={"10"} px={"5"}>
+    <Box maxW="1200px" mx="auto" my={5} px={5}>
       <Box mb={"5"}>
         <Heading as="h1" size={"2xl"} mb={"2"}>
           Climate Policy Search App

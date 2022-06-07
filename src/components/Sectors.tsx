@@ -8,7 +8,7 @@ type TProps = {
 
 export const Sectors = ({ sectors }: TProps) => {
   return (
-    <Box mb={"10"}>
+    <Box mb={"5"}>
       <Heading as="h2" size={"xl"} mb={"2"}>
         Sectors
       </Heading>

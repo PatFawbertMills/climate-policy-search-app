@@ -1,5 +1,12 @@
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { Tag, Flex } from "@chakra-ui/react";
+import {
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  Flex,
+  Collapse,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { TSector } from "../types";
 
 type TProps = {
@@ -8,6 +15,7 @@ type TProps = {
 
 // Accepts an object collection of sectors and renders them out in a list
 export const SectorList = ({ sectors }: TProps) => {
+  const variant = useBreakpointValue({ base: "base", md: "md" });
   const navigate = useNavigate();
   const [_, setSearchParams] = useSearchParams();
   const { sector } = useParams();
@@ -20,18 +28,29 @@ export const SectorList = ({ sectors }: TProps) => {
   };
 
   return (
-    <Flex justify={"center"} wrap={"wrap"}>
-      {sectors.map((item) => (
-        <Tag
-          key={item.name}
-          onClick={() => handleClick(item.name)}
-          cursor={"pointer"}
-          colorScheme={item.name === sector ? "blue" : "gray"}
-          m={1}
-        >
-          {item.name} ({item.no_of_policies})
-        </Tag>
-      ))}
+    <Flex justify={"flex-start"} wrap={"wrap"}>
+      {sectors.map((item) => {
+        const selected = item.name === sector;
+        return (
+          <Collapse
+            in={variant === "md" || !sector || selected}
+            key={item.name}
+          >
+            <Tag
+              key={item.name}
+              onClick={() => handleClick(item.name)}
+              cursor={"pointer"}
+              colorScheme={selected ? "blue" : "gray"}
+              m={1}
+            >
+              <TagLabel>
+                {item.name} ({item.no_of_policies})
+              </TagLabel>
+              {selected && <TagCloseButton />}
+            </Tag>
+          </Collapse>
+        );
+      })}
     </Flex>
   );
 };
