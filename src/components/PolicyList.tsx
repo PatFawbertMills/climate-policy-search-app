@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import {
   TableContainer,
@@ -31,6 +31,8 @@ export const PolicyList = ({ policies }: TProps) => {
   const { sector, policyId } = useParams();
   const [searchParams] = useSearchParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [itemOffset, setItemOffset] = useState(50);
+  const itemsPerLoad = 50;
   const searchTerm = searchParams.get("q");
 
   // Take the URL if we have one and get the selected policy
@@ -41,6 +43,12 @@ export const PolicyList = ({ policies }: TProps) => {
   const filteredPolicies = useMemo(() => {
     return filterPolicies(policies, sector, searchTerm || "");
   }, [policies, sector, searchTerm]);
+
+  // Huge performance increase by limiting the items shown to 50
+  // Ensure we reset the items per page when switching between sectors or making a search
+  useEffect(() => {
+    setItemOffset(50);
+  }, [sector, searchParams]);
 
   // Important to retain the search conditions when opening and closing the drawer
   const handleMetadataClick = (policy: TPolicy) => {
@@ -75,7 +83,7 @@ export const PolicyList = ({ policies }: TProps) => {
                 <Td colSpan={3}>Sorry, no results found</Td>
               </Tr>
             ) : (
-              filteredPolicies.map((policy) => (
+              filteredPolicies.slice(0, itemOffset).map((policy) => (
                 <Tr key={policy.policy_id}>
                   <Td>{policy.policy_title}</Td>
                   <Td>{policy.sectors.split(";").join(", ")}</Td>
@@ -98,6 +106,13 @@ export const PolicyList = ({ policies }: TProps) => {
               <Th>Sectors</Th>
             </Tr>
           </Tfoot>
+          {filteredPolicies.length > itemOffset && (
+            <TableCaption placement={"bottom"}>
+              <Button onClick={() => setItemOffset(itemOffset + itemsPerLoad)}>
+                Load more
+              </Button>
+            </TableCaption>
+          )}
         </Table>
       </TableContainer>
       <PolicyDrawer
