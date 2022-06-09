@@ -25,8 +25,6 @@ type TProps = {
 // Renders any additional information about the policy
 // Meta data form and list is managed in their respective components
 export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
-  if (!policy) return null;
-  
   const toast = useToast();
   const [policyMeta, setPolicyMeta] = useState<TMeta[]>([]);
 
@@ -54,6 +52,7 @@ export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
     });
   };
 
+  if (!policy) return null;
   return (
     <Drawer isOpen={isOpen} placement="right" size={"lg"} onClose={onClose}>
       <DrawerOverlay />

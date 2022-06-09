@@ -15,7 +15,7 @@ type TProps = {
 
 // Accepts an object collection of sectors and renders them out in a list
 export const SectorList = ({ sectors }: TProps) => {
-  const variant = useBreakpointValue({ base: "base", md: "md" });
+  const variant = useBreakpointValue({ md: true });
   const navigate = useNavigate();
   const [_, setSearchParams] = useSearchParams();
   const { sector } = useParams();
@@ -32,10 +32,7 @@ export const SectorList = ({ sectors }: TProps) => {
       {sectors.map((item) => {
         const selected = item.name === sector;
         return (
-          <Collapse
-            in={variant === "md" || !sector || selected}
-            key={item.name}
-          >
+          <Collapse in={variant || !sector || selected} key={item.name}>
             <Tag
               key={item.name}
               onClick={() => handleClick(item.name)}

@@ -26,7 +26,7 @@ type TProps = {
 // Carries out additional filtering, via a utility method, on the collection based on sector and search params
 // The Drawer component is rendered within this view as it needs access to the selectedPolicy
 export const PolicyList = ({ policies }: TProps) => {
-  const variant = useBreakpointValue({ base: "base", md: "md" });
+  const variant = useBreakpointValue({ md: true });
   const navigate = useNavigate();
   const { sector, policyId } = useParams();
   const [searchParams] = useSearchParams();
@@ -93,7 +93,7 @@ export const PolicyList = ({ policies }: TProps) => {
                       size="sm"
                       onClick={() => handleMetadataClick(policy)}
                     >
-                      {variant === "base" ? "🖉" : "Edit"}
+                      {variant ? "Edit" : "🖉"}
                     </Button>
                   </Td>
                 </Tr>
