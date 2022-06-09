@@ -25,6 +25,8 @@ type TProps = {
 // Renders any additional information about the policy
 // Meta data form and list is managed in their respective components
 export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
+  if (!policy) return null;
+  
   const toast = useToast();
   const [policyMeta, setPolicyMeta] = useState<TMeta[]>([]);
 
@@ -41,7 +43,7 @@ export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
 
   // Handle the deletion of the meta here where we have access to the policy context
   const deleteMetaData = (key: string) => {
-    if(!policy?.policy_id) return;
+    if (!policy?.policy_id) return;
     setPolicyMeta(deleteMetaItem(policy.policy_id, key));
     toast({
       title: "Metadata deleted",
@@ -52,13 +54,8 @@ export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
     });
   };
 
-  return policy ? (
-    <Drawer
-      isOpen={isOpen && policy !== null}
-      placement="right"
-      size={"lg"}
-      onClose={onClose}
-    >
+  return (
+    <Drawer isOpen={isOpen} placement="right" size={"lg"} onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -75,7 +72,7 @@ export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
             visible={isOpen}
             onComplete={handleNewMeta}
           />
-          {policyMeta && (
+          {policyMeta?.length > 0 && (
             <>
               <Text fontSize="sm" mb={"5"} mt={"5"}>
                 Existing metadata
@@ -94,5 +91,5 @@ export const PolicyDrawer = ({ isOpen, onClose, policy }: TProps) => {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  ) : null;
+  );
 };
