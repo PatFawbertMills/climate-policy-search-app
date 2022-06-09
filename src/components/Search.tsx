@@ -19,7 +19,7 @@ export const Search = () => {
 
   // If we refresh the page, or we set the searchTerm from elsewhere populate our search
   useEffect(() => {
-    setSearch(searchTerm || "");
+    setSearch(searchTerm ?? "");
   }, [searchTerm]);
 
   // Delay the search until we feel as though the user has finished typing their search (half a second)
